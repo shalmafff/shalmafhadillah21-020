@@ -70,7 +70,14 @@ body {
 /* dropdown menu style */
 .dropdown-menu {
   display: none;
+  position: fixed;
+  z-index: 1;
+  top: 0;
+  width: 100%;
+  margin: 0;
+  padding: 0;
 }
+
 
 .menu-bar ul li:hover .dropdown-menu {
   display: block;
