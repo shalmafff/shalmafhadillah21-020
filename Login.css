@@ -1,0 +1,53 @@
+* {
+  margin: 0;
+  pad: 0;
+  outline: 0;
+  font-family: "Open Sans", sans-serif;
+}
+body {
+  height: 100vh;
+  background-image: url(The\ Starry\ Night.jpg);
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+.container {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  padding: 20px 50px;
+  width: 400px;
+
+  background-color: rgba(7, 47, 73, 0.712);
+  box-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
+}
+.container h1 {
+  text-align: center;
+  color: #fafafa;
+  margin-bottom: 30px;
+  text-transform: uppercase;
+  border-bottom: 5px solid #041129;
+}
+.container label {
+  text-align: left;
+  color: #90caf9;
+}
+.container form input {
+  width: calc(100% - 20px);
+  padding: 10px 15px;
+  margin-bottom: 30px;
+  border: none;
+  background-color: transparent;
+  border-bottom: 2px solid #041129;
+  color: #fff;
+  font-size: 20px;
+}
+.container form button {
+  width: 100%;
+  padding: 10px 0;
+  border: none;
+  background-color: #041129;
+  font-size: 18px;
+  color: #fafafa;
+}
