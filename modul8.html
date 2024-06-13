@@ -1,0 +1,324 @@
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css"
+    />
+    <link rel="stylesheet" href="style.css" />
+    <title>PERPUSTAKAAN CHASEATL</title>
+  </head>
+  <body>
+    <div class="menu-bar">
+      <h1 class="logo">CHASEATL <span>LIBRARY</span></h1>
+      <ul>
+        <li><a href="home.html">HOME</a></li>
+        <li><a href="about us.html">ABOUT</a></li>
+        <li>
+          <a href="#">MODUL<i class="fas fa-caret-down"></i></a>
+          <div class="dropdown-menu">
+            <ul>
+              <li>
+                <a href="#">MODUL 1 <i class="fas fa-caret-right"></i></a>
+                <div class="dropdown-menu-1">
+                  <ul>
+                    <li><a href="jquery.html">Perpustakaan</a></li>
+                    <li><a href="modul 1(2).html">Audio dan Video</a></li>
+                  </ul>
+                </div>
+              </li>
+              <li>
+                <a href="#">MODUL 2 <i class="fas fa-caret-right"></i></a>
+                <div class="dropdown-menu-1">
+                  <ul>
+                    <li><a href="modul 2(1).html">Form Pribadi</a></li>
+                    <li><a href="modul 2(2).html">Form Buku</a></li>
+                  </ul>
+                </div>
+              </li>
+              <li><a href="modul 3.html">MODUL 3</a></li>
+              <li>
+                <a href="#">MODUL 4<i class="fas fa-caret-right"></i></a>
+                <div class="dropdown-menu-1">
+                  <ul>
+                    <li><a href="tabel border.html">Tabel border</a></li>
+                    <li><a href="form button.html">Form Button</a></li>
+                  </ul>
+                </div>
+              </li>
+              <li><a href="modul 5 js.html">MODUL 5</a></li>
+              <li><a href="modul 8 js.html">MODUL 8</a></li>
+            </ul>
+          </div>
+        </li>
+        <li><a href="BOOKFAIR.html">BOOK FAIR</a></li>
+        <li><a href="contact us.html">CONTACT US</a></li>
+        <li><a href="log in.html">LOGIN</a></li>
+      </ul>
+    </div>
+    <!DOCTYPE html>
+    <html lang="en">
+      <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>mod.8</title>
+        <style>
+          body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+          }
+
+          h1 {
+            text-align: center;
+            padding: 25px 0;
+            color: #02112e;
+          }
+
+          table {
+            width: 80%;
+            margin: 20px auto;
+            border-collapse: collapse;
+            background-color: #fff;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+          }
+
+          th,
+          td {
+            padding: 20px;
+            text-align: left;
+            border-bottom: 2px solid #0e053f8e;
+          }
+
+          th {
+            background-color: #f2f2f2;
+          }
+
+          form {
+            width: 80%;
+            margin: 20px auto;
+            background-color: #fff;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+            padding: 10px;
+          }
+
+          input[type="text"],
+          input[type="number"] {
+            width: calc(100% - 1px);
+            padding: 15px;
+            margin-bottom: 10px;
+            border: 3px solid #0e053f7e;
+            border-radius: 10px;
+            box-sizing: border-box;
+          }
+
+          button {
+            background-color: #0e053f;
+            color: white;
+            padding: 15px 35px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+          }
+
+          button:hover {
+            background-color: #354db8;
+          }
+
+          @media (max-width: 768px) {
+            table {
+              width: 100%;
+            }
+
+            form {
+              width: 100%;
+            }
+          }
+        </style>
+      </head>
+      <body>
+        <h1>DATABASE PERPUSTAKAAN</h1>
+        <table>
+          <thead>
+            <tr>
+              <th>JUDUL</th>
+              <th>PENULIS</th>
+              <th>TAHUN</th>
+              <th>ISBN</th>
+              <th>EDIT</th>
+            </tr>
+          </thead>
+          <tbody id="libraryBody">
+            <!-- Data rows will be inserted here by JavaScript -->
+          </tbody>
+        </table>
+
+        <form id="libraryForm">
+          <input type="hidden" id="editIndex" />
+          <input type="text" id="title" placeholder="Title" required />
+          <input type="text" id="author" placeholder="Author" required />
+          <input type="number" id="YEAR" placeholder="YEAR" required />
+          <input type="text" id="isbn" placeholder="ISBN" required />
+          <button type="button" onclick="addOrUpdateBook()">
+            Tambah/Perbaharui
+          </button>
+        </form>
+
+        <script>
+          let libraryData = [
+            {
+              title: "Amor fati",
+              author: " Stefani Bella, Syahid Muhammad",
+              year: 2020,
+              isbn: "9786022081616",
+            },
+            {
+              title: "Egosentris",
+              author: "Syahid Muhammad",
+              year: 2020,
+              isbn: "9786022081654",
+            },
+          ];
+
+          document.addEventListener("DOMContentLoaded", function () {
+            displayLibrary();
+          });
+
+          function displayLibrary() {
+            const tbody = document.getElementById("libraryBody");
+            tbody.innerHTML = "";
+            libraryData.forEach((book, index) => {
+              const row = tbody.insertRow();
+              row.innerHTML = `
+            <td>${book.title}</td>
+            <td>${book.author}</td>
+            <td>${book.year}</td>
+            <td>${book.isbn}</td>
+            <td>
+                <button onclick="editBook(${index})">Edit</button>
+                <button onclick="deleteBook(${index})">Hapus</button>
+            </td>
+        `;
+            });
+          }
+
+          function addOrUpdateBook() {
+            const title = document.getElementById("title").value;
+            const author = document.getElementById("author").value;
+            const year = document.getElementById("year").value;
+            const isbn = document.getElementById("isbn").value;
+            const editIndex = document.getElementById("editIndex").value;
+
+            const book = { title, author, year, isbn };
+
+            if (editIndex === "") {
+              libraryData.push(book);
+            } else {
+              libraryData[editIndex] = book;
+              document.getElementById("editIndex").value = "";
+            }
+
+            document.getElementById("libraryForm").reset();
+            displayLibrary();
+          }
+
+          function editBook(index) {
+            const book = libraryData[index];
+            document.getElementById("title").value = book.title;
+            document.getElementById("author").value = book.author;
+            document.getElementById("year").value = book.year;
+            document.getElementById("isbn").value = book.isbn;
+            document.getElementById("editIndex").value = index;
+          }
+
+          function deleteBook(index) {
+            libraryData.splice(index, 1);
+            displayLibrary();
+          }
+        </script>
+        <html lang="en">
+          <head>
+            <meta charset="UTF-8" />
+            <meta
+              name="viewport"
+              content="width=device-width, initial-scale=1.0"
+            />
+            <title>Footer Perpustakaan</title>
+            <!-- Tambahkan Font Awesome CSS -->
+            <link
+              rel="stylesheet"
+              href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"
+              integrity="sha512-nR1c4E3x7Vax+p3Q7z4e5fVpkRuknSCwMZYemDAPFEid+FW/tEWT8kGz0FfIQ4l+cMmz6z4LZBj71E8J9a3qKw=="
+              crossorigin="anonymous"
+              referrerpolicy="no-referrer"
+            />
+            <style>
+              body {
+                font-family: Arial, sans-serif;
+                margin: 0;
+                padding: 0;
+              }
+
+              footer {
+                background-color: #141d28;
+                color: #cfd9e4;
+                padding: 20px 0;
+                text-align: center;
+              }
+
+              .social-media {
+                list-style-type: none;
+                padding: 0;
+              }
+
+              .social-media li {
+                display: inline-block;
+                margin: 0 10px;
+              }
+
+              .social-media li a {
+                color: #fff;
+                font-size: 20px;
+                text-decoration: none;
+              }
+            </style>
+          </head>
+          <body>
+            <!-- Konten website di sini -->
+
+            <footer>
+              <ul class="social-media">
+                <li>
+                  <a href="http://facebook.com/ChaseAtlantic"
+                    ><i class="fab fa-facebook-f"></i
+                  ></a>
+                </li>
+                <li>
+                  <a href="https://x.com/ChaseAtlantic"
+                    ><i class="fab fa-twitter"></i
+                  ></a>
+                </li>
+                <li>
+                  <a
+                    href="https://www.instagram.com/chaseatlantic?igsh=NHZodzY4cXJscTN0"
+                    ><i class="fab fa-instagram"></i
+                  ></a>
+                </li>
+                <li>
+                  <a
+                    href="https://youtube.com/@chaseatlantic?si=rGFkRteSnaKxdk2x"
+                    ><i class="fab fa-youtube"></i
+                  ></a>
+                </li>
+              </ul>
+              <p>&copy; 2024 made by CHASEATL Library.</p>
+            </footer>
+          </body>
+        </html>
+      </body>
+    </html>
+  </body>
+</html>
